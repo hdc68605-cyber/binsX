@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Únete al grupo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffdff1, #ffeccf, #e0f7ff);
+      position: relative;
+    }
+
+    .cats-bg {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .cat {
+      position: absolute;
+      font-size: clamp(28px, 4vw, 58px);
+      user-select: none;
+      animation-name: bounceAround;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,0.12));
+      opacity: 0.95;
+    }
+
+    .cat:nth-child(1) { left: 5%; top: 8%; animation-duration: 7s; }
+    .cat:nth-child(2) { left: 18%; top: 70%; animation-duration: 9s; }
+    .cat:nth-child(3) { left: 30%; top: 18%; animation-duration: 8s; }
+    .cat:nth-child(4) { left: 42%; top: 78%; animation-duration: 10s; }
+    .cat:nth-child(5) { left: 58%; top: 14%; animation-duration: 7.5s; }
+    .cat:nth-child(6) { left: 72%; top: 66%; animation-duration: 9.5s; }
+    .cat:nth-child(7) { left: 82%; top: 22%; animation-duration: 8.5s; }
+    .cat:nth-child(8) { left: 88%; top: 80%; animation-duration: 11s; }
+    .cat:nth-child(9) { left: 12%; top: 38%; animation-duration: 8.8s; }
+    .cat:nth-child(10) { left: 66%; top: 40%; animation-duration: 7.8s; }
+
+    @keyframes bounceAround {
+      0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+      20%  { transform: translate(35px, -55px) rotate(8deg) scale(1.08); }
+      40%  { transform: translate(-25px, 35px) rotate(-7deg) scale(0.98); }
+      60%  { transform: translate(45px, -30px) rotate(10deg) scale(1.1); }
+      80%  { transform: translate(-30px, 40px) rotate(-8deg) scale(1.02); }
+      100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+      z-index: 2;
+    }
+
+    .center-box {
+      position: relative;
+      z-index: 3;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.6);
+      padding: 36px 28px;
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: #5b365f;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: #6d5a6f;
+      font-size: 1.05rem;
+      margin-bottom: 26px;
+      line-height: 1.5;
+    }
+
+    .btn-whatsapp {
+      border: none;
+      cursor: pointer;
+      padding: 18px 34px;
+      border-radius: 999px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      box-shadow: 0 12px 25px rgba(18, 140, 126, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 30px rgba(18, 140, 126, 0.42);
+      filter: brightness(1.03);
+    }
+
+    .btn-whatsapp:active {
+      transform: scale(0.98);
+    }
+
+    .message {
+      min-height: 28px;
+      margin-top: 18px;
+      color: #7c3f68;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .side-avatar {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000000;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.22);
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-radius: 20px;
+      animation: floatGentle 3.8s ease-in-out infinite;
+      backdrop-filter: blur(6px);
+    }
+
+    .x-mark {
+      width: 138px;
+      height: 138px;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(255,255,255,0.08));
+    }
+
+    .x-mark svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .x-mark::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .x-mark::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    @keyframes floatGentle {
+      0% { transform: translateY(-50%) translate(0, 0); }
+      25% { transform: translateY(-50%) translate(1px, -4px); }
+      50% { transform: translateY(-50%) translate(0, 0); }
+      75% { transform: translateY(-50%) translate(-1px, 4px); }
+      100% { transform: translateY(-50%) translate(0, 0); }
+    }
+
+    @media (max-width: 700px) {
+      .side-avatar {
+        width: 115px;
+        height: 115px;
+        right: 14px;
+        top: 16px;
+        transform: none;
+        border-radius: 16px;
+      }
+
+      .x-mark {
+        width: 84px;
+        height: 84px;
+      }
+
+      @keyframes floatGentle {
+        0% { transform: translate(0, 0); }
+        25% { transform: translate(1px, -3px); }
+        50% { transform: translate(0, 0); }
+        75% { transform: translate(-1px, 3px); }
+        100% { transform: translate(0, 0); }
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cats-bg" aria-hidden="true">
+    <div class="cat">🐱</div>
+    <div class="cat">😻</div>
+    <div class="cat">🐾</div>
+    <div class="cat">🐱</div>
+    <div class="cat">😺</div>
+    <div class="cat">🐾</div>
+    <div class="cat">🐱</div>
+    <div class="cat">😸</div>
+    <div class="cat">🐾</div>
+    <div class="cat">😽</div>
+  </div>
+
+  <div class="overlay"></div>
+
+  <div class="side-avatar" aria-hidden="true">
+    <div class="x-mark">
+      <svg viewBox="0 0 160 160" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <path d="M32 18 L66 18 L128 142 L94 142 Z" fill="#ffffff"/>
+          <path d="M128 18 L94 18 L32 142 L66 142 Z" fill="#ffffff"/>
+
+          <path d="M49 28 L59 28 L70 49 L59 45 L73 66 L62 63 L77 85 L64 82 L83 109 L69 106 L89 133 L79 133 L61 101 L71 104 L53 79 L65 82 L49 58 L60 61 Z" fill="#000000" opacity="0.95"/>
+
+          <path d="M112 27 L99 30 L90 48 L103 42 L88 63 L101 59 L84 82 L99 78 L79 106 L94 102 L72 133 L83 132 L101 102 L89 105 L108 79 L95 82 L111 57 L99 61 Z" fill="#000000" opacity="0.95"/>
+
+          <path d="M64 74 L95 86 L88 96 L59 84 Z" fill="#000000" opacity="0.95"/>
+          <path d="M69 63 L101 75 L96 83 L65 72 Z" fill="#000000" opacity="0.95"/>
+          <path d="M58 92 L88 103 L82 112 L52 100 Z" fill="#000000" opacity="0.95"/>
+
+          <path d="M31 18 L66 18 L128 142 L94 142" fill="none" stroke="#ffffff" stroke-width="6" stroke-linejoin="round"/>
+          <path d="M128 18 L94 18 L32 142 L66 142" fill="none" stroke="#ffffff" stroke-width="6" stroke-linejoin="round"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <main class="center-box">
+    <section class="card">
+      <h1 class="title">BINS X</h1>
+      <p class="subtitle">ganador entra a este grupo donde todos son bienvenidos</p>
+      <button class="btn-whatsapp" id="joinBtn">Unirte al grupo de WhatsApp</button>
+      <p class="message" id="message"></p>
+    </section>
+  </main>
+
+  <script>
+    const button = document.getElementById('joinBtn');
+    const message = document.getElementById('message');
+    const whatsappLink = 'https://chat.whatsapp.com/K9ImxbaMd7MJdJPbpC9GEL';
+
+    button.addEventListener('click', () => {
+      message.textContent = 'eres genial';
+      setTimeout(() => {
+        window.location.href = whatsappLink;
+      }, 900);
+    });
+  </script>
+</body>
+</html>
